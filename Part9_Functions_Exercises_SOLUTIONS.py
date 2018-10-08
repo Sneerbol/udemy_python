@@ -2,6 +2,7 @@
 #### PART 9: FUNCTION EXERCISES #####
 #####################################
 
+# SOLUTIONS FILE
 
 # Complete the tasks below by writing functions! Keep in mind, these can be
 # really tough, its all about breaking the problem down into smaller, logical
@@ -21,7 +22,13 @@
 # arrayCheck([1, 1, 2, 1, 2, 3]) → True
 
 def arrayCheck(nums):
-    # CODE GOES HERE
+
+    # Note: iterate with length-2, so can use i+1 and i+2 in the loop
+    for i in range(len(nums)-2):
+        # Check in sets of 3 if we have 1,2,3 in a row
+        if nums[i]==1 and nums[i+1]==2 and nums[i+2]==3:
+            return True
+    return False
 
 
 #####################
@@ -38,7 +45,15 @@ def arrayCheck(nums):
 # stringBits('Heeololeo') → 'Hello'
 
 def stringBits(str):
-  # CODE GOES HERE
+  result = ""
+  # Many ways to do this.
+
+  # This uses the standard loop of i on every char,
+  # and inside the loop skips the odd index values.
+  for i in range(len(str)):
+    if i % 2 == 0:
+      result = result + str[i]
+  return result
 
 
 #####################
@@ -59,7 +74,13 @@ def stringBits(str):
 
 
 def end_other(a, b):
-  # CODE GOES HERE
+  a = a.lower()
+  b = b.lower()
+
+  # Optional use of endswith() method
+  #return (b.endswith(a) or a.endswith(b))
+
+  return a[-(len(b)):] == b or a == b[-(len(a)):]
 
 #####################
 ## -- PROBLEM 4 -- ##
@@ -73,7 +94,10 @@ def end_other(a, b):
 # doubleChar('Hi-There') → 'HHii--TThheerree'
 
 def doubleChar(str):
-  # CODE GOES HERE
+  result = ''
+  for char in str:
+    result += char * 2
+  return result
 
 
 #####################
@@ -98,9 +122,14 @@ def doubleChar(str):
 # no_teen_sum(2, 1, 14) → 3
 
 def no_teen_sum(a, b, c):
-  # CODE GOES HERE
+  return fix_teen(a) + fix_teen(b) + fix_teen(c)
+
 def fix_teen(n):
-  # CODE GOES HERE
+  # another way without the "in" operator
+  #if 13 <= n <= 14 or 17 <= n <= 19:
+  if n in [13, 14, 17, 18, 19]:
+    return 0
+  return n
 
 #####################
 ## -- PROBLEM 6 -- ##
@@ -115,4 +144,8 @@ def fix_teen(n):
 # count_evens([1, 3, 5]) → 0
 
 def count_evens(nums):
-  # CODE GOES HERE
+  count = 0
+  for element in nums:
+    if element % 2 == 0:
+      count += 1
+  return count
